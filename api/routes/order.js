@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Order = require("../models/Order");
 
-router.post("/", (req, res) => {
+router.post("/", require("../middlewares/authOnly"), (req, res) => {
 	const {
 		chocolateType,
 		dueDate,
