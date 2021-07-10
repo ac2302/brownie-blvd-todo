@@ -87,13 +87,19 @@ app.use((req, res, next) => {
 
 		User.findOne({ username, password }, (err, doc) => {
 			if (err) res.statusCode(500).json({ err });
-			
 			else if (doc === null) req.auth = { isAuthenticated: false };
 			else req.auth = { isAuthenticated: true, user: username };
 
 			next();
 		});
 	}
+});
+
+// login
+app.post("/login", (req, res) => {
+	if (req.auth.isAuthenticated)
+		res.json({ loggedIn: true, user: req.auth.user });
+	else res.json({loggedIn: false, message: "incorrent username or password"});
 });
 
 // get all orders
