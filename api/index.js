@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+// basic middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // connecting to db
 mongoose.connect(
 	process.env.DB_STRING,
@@ -14,29 +18,11 @@ mongoose.connect(
 );
 
 // schema
-const ChocolateType = mongoose.model(
-	"ChocolateType",
-	new mongoose.Schema({
-		name: {
-			type: String,
-			required: true,
-		},
-	})
-);
-const Payment = mongoose.model(
-	"Payment",
-	new mongoose.Schema({
-		method: { type: String },
-		paid: { type: Boolean },
-		amount: { type: Number },
-	})
-);
 const Order = mongoose.model(
 	"Order",
 	new mongoose.Schema({
 		cocolateType: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "ChocolateType",
+			type: String,
 		},
 		dueDate: {
 			type: Date,
@@ -44,12 +30,26 @@ const Order = mongoose.model(
 		hasToBeDelivered: {
 			type: Boolean,
 		},
+		deliveryAddress: {
+			type: String,
+		},
 		nameOnCard: {
 			type: String,
 		},
-		payment: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Payment",
+		isPaidFor: {
+			type: String,
+		},
+		paymentMethod: {
+			type: String,
+		},
+		paymentAmount: {
+			type: Number,
+		},
+		quantity: {
+			type: Number,
+		},
+		note: {
+			type: String,
 		},
 	})
 );
@@ -61,6 +61,40 @@ app.get("/orders", (req, res) => {
 		else {
 			res.json({ orders: docs });
 		}
+	});
+});
+
+// post an order
+app.post("/order", (req, res) => {
+	const {
+		chocolateType,
+		dueDate,
+		hasToBeDelivered,
+		deliveryAddress,
+		nameOnCard,
+		isPaidFor,
+		paymentMethod,
+		paymentAmount,
+		quantity,
+		note,
+	} = req.body;
+
+	const newOrder = new Order({
+		chocolateType,
+		dueDate,
+		hasToBeDelivered,
+		deliveryAddress,
+		nameOnCard,
+		isPaidFor,
+		paymentMethod,
+		paymentAmount,
+		quantity,
+		note,
+	});
+
+	newOrder.save((err) => {
+		if (err) res.statusCode(500).json({ err });
+		else res.json({ added: true, order: newOrder });
 	});
 });
 
