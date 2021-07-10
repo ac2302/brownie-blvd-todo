@@ -24,60 +24,14 @@ const User = require("./models/User");
 const Order = require("./models/Order");
 
 // login
-app.post("/login", (req, res) => {
-	if (req.auth.isAuthenticated)
-		res.json({ loggedIn: true, user: req.auth.user });
-	else res.json({ loggedIn: false, message: "incorrent username or password" });
-});
+app.use("/login", require("./routes/login"));
 
 // get all orders
-app.get("/orders", (req, res) => {
-	Order.find({}, (err, docs) => {
-		if (err) res.statusCode(500).json({ err });
-		else {
-			res.json({ orders: docs });
-		}
-	});
-});
+app.use("/orders", require("./routes/orders"));
 
 // post an order
-app.post("/order", (req, res) => {
-	const {
-		chocolateType,
-		dueDate,
-		hasToBeDelivered,
-		deliveryAddress,
-		nameOnCard,
-		isPaidFor,
-		paymentMethod,
-		paymentAmount,
-		quantity,
-		note,
-	} = req.body;
+app.use("/order", require("./routes/order"));
 
-	const newOrder = new Order({
-		chocolateType,
-		dueDate,
-		hasToBeDelivered,
-		deliveryAddress,
-		nameOnCard,
-		isPaidFor,
-		paymentMethod,
-		paymentAmount,
-		quantity,
-		note,
-	});
-
-	newOrder.save((err) => {
-		if (err) res.statusCode(500).json({ err });
-		else
-			res.json({
-				added: true,
-				order: newOrder,
-				auth: req.auth,
-			});
-	});
-});
-
+// listen for connections
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`server live on port ${PORT}`));
