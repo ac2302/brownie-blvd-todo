@@ -17,7 +17,18 @@ mongoose.connect(
 	}
 );
 
-// schema
+// schemas
+const User = mongoose.model(
+	"User",
+	new mongoose.Schema({
+		username: {
+			type: String,
+		},
+		password: {
+			type: String,
+		},
+	})
+);
 const Order = mongoose.model(
 	"Order",
 	new mongoose.Schema({
@@ -53,6 +64,37 @@ const Order = mongoose.model(
 		},
 	})
 );
+
+// basic authentication middleware
+app.use((req, res, next) => {
+	if (!req.body.user) {
+		// there is no user in body
+		req.auth = { isAuthenticated: false };
+		next();
+	} else if (
+		!(
+			req.body.user.hasOwnProperty("username") &&
+			req.body.user.hasOwnProperty("password")
+		)
+	) {
+		// the user in body does not have all the required fields
+		req.auth = { isAuthenticated: false };
+		next();
+	} else {
+		// valid input
+		// authenticating
+		const { username, password } = req.body.user;
+
+		User.findOne({ username, password }, (err, doc) => {
+			if (err) res.statusCode(500).json({ err });
+			
+			else if (doc === null) req.auth = { isAuthenticated: false };
+			else req.auth = { isAuthenticated: true, user: username };
+
+			next();
+		});
+	}
+});
 
 // get all orders
 app.get("/orders", (req, res) => {
@@ -94,7 +136,12 @@ app.post("/order", (req, res) => {
 
 	newOrder.save((err) => {
 		if (err) res.statusCode(500).json({ err });
-		else res.json({ added: true, order: newOrder });
+		else
+			res.json({
+				added: true,
+				order: newOrder,
+				auth: req.auth,
+			});
 	});
 });
 
