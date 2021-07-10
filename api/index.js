@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-// basic middleware
+// all route middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,52 +18,8 @@ mongoose.connect(
 );
 
 // schemas
-const User = mongoose.model(
-	"User",
-	new mongoose.Schema({
-		username: {
-			type: String,
-		},
-		password: {
-			type: String,
-		},
-	})
-);
-const Order = mongoose.model(
-	"Order",
-	new mongoose.Schema({
-		cocolateType: {
-			type: String,
-		},
-		dueDate: {
-			type: Date,
-		},
-		hasToBeDelivered: {
-			type: Boolean,
-		},
-		deliveryAddress: {
-			type: String,
-		},
-		nameOnCard: {
-			type: String,
-		},
-		isPaidFor: {
-			type: String,
-		},
-		paymentMethod: {
-			type: String,
-		},
-		paymentAmount: {
-			type: Number,
-		},
-		quantity: {
-			type: Number,
-		},
-		note: {
-			type: String,
-		},
-	})
-);
+const User = require("./models/User");
+const Order = require("./models/Order");
 
 // basic authentication middleware
 app.use((req, res, next) => {
@@ -99,7 +55,7 @@ app.use((req, res, next) => {
 app.post("/login", (req, res) => {
 	if (req.auth.isAuthenticated)
 		res.json({ loggedIn: true, user: req.auth.user });
-	else res.json({loggedIn: false, message: "incorrent username or password"});
+	else res.json({ loggedIn: false, message: "incorrent username or password" });
 });
 
 // get all orders
