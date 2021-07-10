@@ -1,10 +1,10 @@
-import React from 'react';
-
+import React, { useState, useEffect } from "react";
+import Login from "./components/Login";
 
 function App() {
-  return (
-    <h1>hello, world!</h1>
-  );
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+	return <>{isAuthenticated ? <h1>logged in</h1> : <Login />}</>;
 }
 
 export default App;
