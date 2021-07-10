@@ -34,7 +34,6 @@ router.post("/", require("../middlewares/authOnly"), (req, res) => {
 			res.json({
 				added: true,
 				order: newOrder,
-				auth: req.auth,
 			});
 	});
 });
