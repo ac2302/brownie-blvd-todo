@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+// creating app
 const app = express();
 
-// all route middleware
+// all route middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(require("./middlewares/auth")); // for auth
 
 // connecting to db
 mongoose.connect(
@@ -20,36 +22,6 @@ mongoose.connect(
 // schemas
 const User = require("./models/User");
 const Order = require("./models/Order");
-
-// basic authentication middleware
-app.use((req, res, next) => {
-	if (!req.body.user) {
-		// there is no user in body
-		req.auth = { isAuthenticated: false };
-		next();
-	} else if (
-		!(
-			req.body.user.hasOwnProperty("username") &&
-			req.body.user.hasOwnProperty("password")
-		)
-	) {
-		// the user in body does not have all the required fields
-		req.auth = { isAuthenticated: false };
-		next();
-	} else {
-		// valid input
-		// authenticating
-		const { username, password } = req.body.user;
-
-		User.findOne({ username, password }, (err, doc) => {
-			if (err) res.statusCode(500).json({ err });
-			else if (doc === null) req.auth = { isAuthenticated: false };
-			else req.auth = { isAuthenticated: true, user: username };
-
-			next();
-		});
-	}
-});
 
 // login
 app.post("/login", (req, res) => {
