@@ -1,7 +1,17 @@
 const router = require("express").Router();
 const Order = require("../models/Order");
+const authOnlyMiddleware = require("../middlewares/authOnly");
 
-router.post("/", require("../middlewares/authOnly"), (req, res) => {
+router.get("/:id", authOnlyMiddleware, (req, res) => {
+	Order.findById(req.params.id, (err, doc) => {
+		if (err) {
+			res.statusCode = 500;
+			res.json({ message: "database error" });
+		} else res.json({ order: doc });
+	});
+});
+
+router.post("/", authOnlyMiddleware, (req, res) => {
 	const {
 		chocolateType,
 		dueDate,
