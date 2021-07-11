@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
 
@@ -14,7 +15,7 @@ router.post("/", async (req, res) => {
 					res.statusCode = 400;
 					res.json({ message: "incorrect username or password" });
 				} else {
-					if (password === currentUser.password) {
+					if (await bcrypt.compare(password, currentUser.password)) {
 						if (!currentUser.isActivated) {
 							res.statusCode = 400;
 							res.json({
