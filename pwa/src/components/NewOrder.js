@@ -23,7 +23,7 @@ function NewOrder({ token }) {
 						quantity: Number(fields["quantity"].value),
 						note: fields["note"].value,
 					};
-					if (details.quantity == 0 || !details.dueDate) {
+					if (details.quantity === 0 || !details.dueDate) {
 						alert("missing required fields");
 					} else {
 						if (window.confirm("are you sure you want to submit")) {

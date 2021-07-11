@@ -16,7 +16,7 @@ function Login({ setIsAuthenticated, setToken }) {
 				},
 				{
 					validateStatus: (status) =>
-						(status >= 200 && status < 300) || status == 400,
+						(status >= 200 && status < 300) || status === 400,
 				}
 			)
 			.then((res) => {
