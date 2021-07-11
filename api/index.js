@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 
 // all route middlewares
-app.use(cors());
+app.use(cors({ exposedHeaders: "auth-token" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(require("./middlewares/auth")); // for auth
