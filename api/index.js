@@ -26,7 +26,10 @@ const User = require("./models/User");
 const Order = require("./models/Order");
 
 // login
-app.use("/login", require("./routes/login"));
+app.use("/user/login", require("./routes/login"));
+
+// register
+app.use("/user/register", require("./routes/register"));
 
 // get all orders
 app.use("/orders", require("./routes/orders"));

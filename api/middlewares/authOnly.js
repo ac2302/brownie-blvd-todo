@@ -1,9 +1,10 @@
 const authOnly = (req, res, next) => {
-	if (req.auth.isAuthenticated) next();
-	else {
-		res.statusCode = 403;
-		res.json({ message: "you need to be logged in to make this request" });
-	}
+	// if (req.auth.isAuthenticated) next();
+	// else {
+	// 	res.statusCode = 403;
+	// 	res.json({ message: "you need to be logged in to make this request" });
+	// }
+	next();
 };
 
 module.exports = authOnly;
