@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
 				res.statusCode = 400;
 				res.json({ message: "username is taken" });
 			} else {
-				const newUser = new User({ username, password });
+				const newUser = new User({ username, password, isActivated: false });
 
 				newUser.save((err) => {
 					if (err) {
@@ -22,6 +22,7 @@ router.post("/", async (req, res) => {
 		} else {
 			res.statusCode = 400;
 			res.json({ message: "missing username and/or password" });
+			// return;
 		}
 	} else {
 		res.statusCode = 400;

@@ -8,14 +8,14 @@ module.exports = (req, res, next) => {
 	if (!token) {
 		req.auth = { isAuthenticated: false };
 		next();
-	}
-
-	try {
-		const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-		req.auth = { isAuthenticated: true, user: verified._id };
-		next();
-	} catch {
-		req.auth = { isAuthenticated: false };
-		next();
+	} else {
+		try {
+			const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+			req.auth = { isAuthenticated: true, user: verified._id };
+			next();
+		} catch {
+			req.auth = { isAuthenticated: false };
+			next();
+		}
 	}
 };

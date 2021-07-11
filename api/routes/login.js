@@ -15,13 +15,21 @@ router.post("/", async (req, res) => {
 					res.json({ message: "incorrect username or password" });
 				} else {
 					if (password === currentUser.password) {
-						// signing and sending token
-						const token = jwt.sign(
-							{ _id: currentUser._id },
-							process.env.TOKEN_SECRET
-						);
-						res.header("auth-token", token);
-						res.json({ loggedIn: true });
+						if (!currentUser.isActivated) {
+							res.statusCode = 400;
+							res.json({
+								message:
+									"your account is not activated. please contact your administrator",
+							});
+						} else {
+							// signing and sending token
+							const token = jwt.sign(
+								{ _id: currentUser._id },
+								process.env.TOKEN_SECRET
+							);
+							res.header("auth-token", token);
+							res.json({ loggedIn: true });
+						}
 					} else {
 						res.statusCode = 400;
 						res.json({ message: "incorrect username or password" });

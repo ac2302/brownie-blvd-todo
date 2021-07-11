@@ -9,5 +9,8 @@ module.exports = mongoose.model(
 		password: {
 			type: String,
 		},
+		isActivated: {
+			type: Boolean,
+		},
 	})
 );
