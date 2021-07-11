@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import MainScreen from "./components/MainScreen";
 import NewOrder from "./components/NewOrder";
+import ViewOrder from "./components/ViewOrder";
 import Page404 from "./components/Page404";
 
 function App() {
@@ -38,9 +39,14 @@ function App() {
 
 				{/* authenticated routes */}
 				{isAuthenticated ? (
-					<Route path="/new" exact={true}>
-						<NewOrder token={token} />
-					</Route>
+					<>
+						<Route path="/new" exact={true}>
+							<NewOrder token={token} />
+						</Route>
+						<Route path="/view/:id">
+							<ViewOrder token={token} />
+						</Route>
+					</>
 				) : (
 					<Login setIsAuthenticated={setIsAuthenticated} setToken={setToken} />
 				)}
