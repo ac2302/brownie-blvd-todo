@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 module.exports = mongoose.model(
 	"Order",
 	new mongoose.Schema({
-		cocolateType: {
+		chocolateType: {
 			type: String,
 		},
 		dueDate: {
