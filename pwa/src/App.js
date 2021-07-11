@@ -8,7 +8,19 @@ import Page404 from "./components/Page404";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [token, setToken] = useState("");
+	const [token, setToken] = useState();
+
+	useEffect(() => {
+		const storedToken = localStorage.getItem("token");
+		if (storedToken) {
+			setIsAuthenticated(true);
+			setToken(storedToken);
+		}
+	}, []);
+
+	useEffect(() => {
+		if (token) localStorage.setItem("token", token);
+	}, [token]);
 
 	return (
 		<Router>

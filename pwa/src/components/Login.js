@@ -24,7 +24,11 @@ function Login({ setIsAuthenticated, setToken }) {
 					setTimeout(() => alert("logged in"), 0);
 					setIsAuthenticated(true);
 					setToken(res.headers["auth-token"]);
-				} else alert(res.data.message);
+				} else {
+					setIsAuthenticated(false);
+					setToken("");
+					alert(res.data.message);
+				}
 			})
 			.catch((err) => {
 				console.error(err);
