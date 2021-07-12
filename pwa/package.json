@@ -27,7 +27,7 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "serve": "serve build -p 4000",
+    "serve": "serve build -p ",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
