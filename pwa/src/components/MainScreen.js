@@ -28,11 +28,11 @@ function MainScreen({ token }) {
 
 function Order({ details }) {
 	return (
-		<div onClick={() => (window.location.href = `/view/${details._id}`)}>
-			<span>
+		<div>
+			<a href={`/view/${details._id}`}>
 				{details.chocolateType} x{details.quantity} in{" "}
 				<Countdown to={details.dueDate} />
-			</span>
+			</a>
 		</div>
 	);
 }
