@@ -23,6 +23,9 @@ function App() {
 		if (token) localStorage.setItem("token", token);
 	}, [token]);
 
+	// setting title
+	document.title = "BB To-Do"
+
 	return (
 		<Router>
 			<Switch>
