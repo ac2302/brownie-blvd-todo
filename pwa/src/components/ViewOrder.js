@@ -10,15 +10,50 @@ function ViewOrder({ token }) {
 
 	useEffect(() => {
 		axios
-			.get(`${config.backendLocation}/orders`, {
+			.get(`${config.backendLocation}/order/${id}`, {
 				headers: { "auth-token": token },
 			})
-			.then((res) => console.log(res));
+			.then((res) => setDetails(res.data.order));
 	}, [id]);
 
 	return (
 		<div>
-			<h1>view order</h1>
+			<h1>
+				{details.chocolateType} x{details.quantity}{" "}
+				{details.hasToBeDelivered ? "+delivery" : null}
+			</h1>
+			<h2>{Date(details.dueDate)}</h2>
+			{/* delivery details */}
+			{details.hasToBeDelivered ? (
+				<div>
+					address:{" "}
+					<pre>
+						{details.deliveryAddress ? details.deliveryAddress : "missing"}
+					</pre>
+				</div>
+			) : null}
+			{/* payment details */}
+			<div>
+				{details.isPaidFor ? <div>paid</div> : null}
+				<div>
+					payment amount:{" "}
+					{details.paymentAmount ? details.paymentAmount + "₹" : "missing"}
+				</div>
+				<div>
+					payment method:{" "}
+					{details.paymentMethod ? details.paymentMethod : "missing"}
+				</div>
+				<div>
+					name on card: {details.nameOnCard ? details.nameOnCard : "missing"}
+				</div>
+			</div>
+			{/* note */}
+			{details.note ? (
+				<div>
+					notes:
+					<pre>{details.note}</pre>
+				</div>
+			) : null}
 		</div>
 	);
 }
