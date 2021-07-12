@@ -8,13 +8,16 @@ import config from "../config";
 function MainScreen({ token }) {
 	const [orders, setOrders] = useState([]);
 
-	useEffect(() => {
+	function fetchOrders() {
 		axios
 			.get(`${config.backendLocation}/orders`, {
 				headers: { "auth-token": token },
 			})
 			.then((res) => setOrders(res.data.orders));
-	}, []);
+	}
+
+	useEffect(fetchOrders, [token]);
+	useEffect(fetchOrders, []);
 
 	return (
 		<div>
