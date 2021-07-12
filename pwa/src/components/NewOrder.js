@@ -6,6 +6,7 @@ import config from "../config";
 function NewOrder({ token }) {
 	return (
 		<div>
+			<a href="/">back to list</a>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();

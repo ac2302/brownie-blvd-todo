@@ -19,12 +19,16 @@ function ViewOrder({ token }) {
 
 	return (
 		<div>
+			<a href="/">back to list</a>
+
 			<h1>
 				{details.chocolateType} x{details.quantity}{" "}
 				{details.hasToBeDelivered ? "+delivery" : null}
 			</h1>
 			<h2>{Date(details.dueDate)}</h2>
-			<h3><Countdown to={details.dueDate} /></h3>
+			<h3>
+				<Countdown to={details.dueDate} />
+			</h3>
 			{/* delivery details */}
 			{details.hasToBeDelivered ? (
 				<div>

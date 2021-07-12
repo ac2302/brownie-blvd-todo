@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Countdown from "./Countdown";
@@ -17,6 +18,7 @@ function MainScreen({ token }) {
 
 	return (
 		<div>
+			<a href="/new">add new order</a>
 			{orders.map((order) => (
 				<Order details={order} key={order._id} />
 			))}
@@ -26,7 +28,7 @@ function MainScreen({ token }) {
 
 function Order({ details }) {
 	return (
-		<div>
+		<div onClick={() => (window.location.href = `/view/${details._id}`)}>
 			<span>
 				{details.chocolateType} x{details.quantity} in{" "}
 				<Countdown to={details.dueDate} />
