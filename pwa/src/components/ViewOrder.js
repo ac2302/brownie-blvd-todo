@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+import Countdown from "./Countdown";
 import config from "../config";
 
 function ViewOrder({ token }) {
@@ -23,6 +24,7 @@ function ViewOrder({ token }) {
 				{details.hasToBeDelivered ? "+delivery" : null}
 			</h1>
 			<h2>{Date(details.dueDate)}</h2>
+			<h3><Countdown to={details.dueDate} /></h3>
 			{/* delivery details */}
 			{details.hasToBeDelivered ? (
 				<div>
