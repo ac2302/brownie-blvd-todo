@@ -15,7 +15,7 @@
 		"web-vitals": "^1.1.2"
 	},
 	"scripts": {
-		"serve": "serve build -p ",
+		"serve": "serve build -s -p ",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
