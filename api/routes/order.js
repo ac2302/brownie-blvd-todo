@@ -48,4 +48,20 @@ router.post("/", authOnlyMiddleware, (req, res) => {
 	});
 });
 
+router.delete("/:id", authOnlyMiddleware, (req, res) => {
+	if (!req.params.id) {
+		res.statusCode = 400;
+		res.json({ message: "id missing" });
+	} else {
+		Order.findByIdAndDelete(req.params.id, (err, doc) => {
+			if (err) {
+				res.statusCode = 500;
+				res.json({ err });
+			} else {
+				res.json({ deleted: doc });
+			}
+		});
+	}
+});
+
 module.exports = router;
