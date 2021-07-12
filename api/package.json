@@ -4,8 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "node app.js",
-		"dev": "env-cmd nodemon app"
+		"start": "node index.js",
+		"startloop": "while : ; do env-cmd node index.js; sleep 10; done",
+		"dev": "env-cmd nodemon index"
 	},
 	"author": "",
 	"license": "ISC",
