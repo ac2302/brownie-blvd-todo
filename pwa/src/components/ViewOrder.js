@@ -17,10 +17,26 @@ function ViewOrder({ token }) {
 			.then((res) => setDetails(res.data.order));
 	}, [id]);
 
+	function deleteOrder() {
+		if (
+			window.confirm(
+				"Are you sure you want to mark this order as completed? This action cannot be undone."
+			)
+		)
+			axios
+				.delete(`${config.backendLocation}/order/${id}`, {
+					headers: { "auth-token": token },
+				})
+				.then((res) => {
+					console.log(res);
+					window.location.href = "/";
+				});
+	}
+
 	return (
 		<div>
 			<a href="/">back to list</a>
-
+			<button onClick={deleteOrder}>mark as done</button>
 			<h1>
 				{details.chocolateType} x{details.quantity}{" "}
 				{details.hasToBeDelivered ? "+delivery" : null}
