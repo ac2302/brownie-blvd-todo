@@ -19,7 +19,7 @@ module.exports = mongoose.model(
 			type: String,
 		},
 		isPaidFor: {
-			type: String,
+			type: Boolean,
 		},
 		paymentMethod: {
 			type: String,
