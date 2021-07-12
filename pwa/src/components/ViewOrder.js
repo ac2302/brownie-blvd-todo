@@ -41,7 +41,10 @@ function ViewOrder({ token }) {
 				{details.chocolateType} x{details.quantity}{" "}
 				{details.hasToBeDelivered ? "+delivery" : null}
 			</h1>
-			<h2>{Date(details.dueDate)}</h2>
+			<h2>
+				{new Date(details.dueDate).toLocaleDateString()}{" "}
+				{new Date(details.dueDate).toLocaleTimeString()}
+			</h2>
 			<h3>
 				<Countdown to={details.dueDate} />
 			</h3>
