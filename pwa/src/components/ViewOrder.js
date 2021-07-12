@@ -35,7 +35,6 @@ function ViewOrder({ token }) {
 
 	return (
 		<div>
-			<a href="/">back to list</a>
 			<button onClick={deleteOrder}>mark as done</button>
 			<h1>
 				{details.chocolateType} x{details.quantity}{" "}

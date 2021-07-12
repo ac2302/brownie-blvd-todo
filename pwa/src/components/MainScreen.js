@@ -20,7 +20,6 @@ function MainScreen({ token }) {
 
 	return (
 		<div>
-			<a href="/new">add new order</a>
 			{orders.map((order) => (
 				<Order details={order} key={order._id} />
 			))}
