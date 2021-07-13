@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAOA,AAAA,WAAW,CAAC;EACX,gBAAgB,EAJP,OAAO;EAKhB,OAAO,EAAE,IAAI;EACb,aAAa,EAAE,IAAI;EACnB,UAAU,EAAE,IAAI,CAAC,IAAI,CAAC,GAAG,CAAC,GAAG,CANhB,oBAAoB;CAajC;;AAXD,AAKC,WALU,CAKV,CAAC,CAAC;EACD,SAAS,EAAE,IAAI;EACf,OAAO,EAAE,KAAK;EACd,KAAK,EAAE,KAAK;EACZ,eAAe,EAAE,IAAI;CACrB",
+    "sources": [
+        "MainScreen.scss"
+    ],
+    "names": [],
+    "file": "MainScreen.css"
+}

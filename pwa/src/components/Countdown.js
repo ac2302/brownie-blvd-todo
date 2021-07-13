@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Countdown({ style, to }) {
+function Countdown({ className, to }) {
 	const [currentTime, setCurrentTime] = useState(Date.now());
 
 	setInterval(() => {
@@ -30,7 +30,7 @@ function Countdown({ style, to }) {
 	if (isDue) prettyCountdown += "due";
 	else prettyCountdown += "left";
 
-	return <span style={style}>{prettyCountdown}</span>;
+	return <span className={className}>{prettyCountdown}</span>;
 }
 
 export default Countdown;

@@ -1,0 +1,19 @@
+$light: #d4e6b5;
+$main: #3e8914;
+$dark: #ff00003f;
+
+$card-bg: #fdfffc;
+$card-shadow: rgba(0, 0, 255, 0.2);
+
+.order-card {
+	background-color: $card-bg;
+	padding: 40px;
+	border-radius: 10px;
+	box-shadow: 12px 10px 2px 1px $card-shadow;
+	a {
+		font-size: 30px;
+		display: block;
+		color: black;
+		text-decoration: none;
+	}
+}

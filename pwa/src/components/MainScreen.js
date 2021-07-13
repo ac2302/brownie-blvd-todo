@@ -4,6 +4,8 @@ import axios from "axios";
 import Countdown from "./Countdown";
 import config from "../config";
 
+import "../styles/MainScreen.css";
+
 function MainScreen({ token }) {
 	const [orders, setOrders] = useState([]);
 
@@ -19,7 +21,7 @@ function MainScreen({ token }) {
 	useEffect(fetchOrders, []);
 
 	return (
-		<div>
+		<div className="order-card">
 			{orders.map((order) => (
 				<Order details={order} key={order._id} />
 			))}
@@ -31,9 +33,9 @@ function Order({ details }) {
 	return (
 		<div>
 			<a href={`/view/${details._id}`}>
-				{details.chocolateType} x{details.quantity} in{" "}
-				<Countdown to={details.dueDate} />
+				{details.chocolateType} x{details.quantity}
 			</a>
+			<Countdown to={details.dueDate} />
 		</div>
 	);
 }
