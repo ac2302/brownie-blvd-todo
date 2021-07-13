@@ -57,11 +57,12 @@ nav .new {
 }
 
 main {
-  margin: 0 auto;
-  display: block;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
   min-height: calc(100vh - 35px);
   max-width: 721px;
-  margin: 0, auto;
   padding: 20px 40px;
   font-size: 20px;
 }
