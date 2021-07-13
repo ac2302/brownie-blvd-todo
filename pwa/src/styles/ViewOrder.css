@@ -1,0 +1,70 @@
+.details-card {
+  padding: 20px;
+  background-color: #fdfffc;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  -webkit-box-shadow: 12px 10px 2px 1px rgba(0, 0, 255, 0.2);
+          box-shadow: 12px 10px 2px 1px rgba(0, 0, 255, 0.2);
+}
+
+.overview-card .icons .icon {
+  font-size: 25px;
+  margin-right: 20px;
+}
+
+.overview-card .icons .due {
+  color: #e53d00;
+}
+
+.overview-card .icons .delivery {
+  color: #2f2f2f;
+}
+
+.overview-card .icons .paid {
+  color: #317b22;
+}
+
+.overview-card button {
+  display: inline-block;
+  color: white;
+  background-color: #e53d00;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  padding: 2px 20px;
+  margin-right: 10px;
+}
+
+.main-card h1 {
+  font-size: 30px;
+}
+
+.main-card .due-date {
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.main-card .countdown {
+  font-size: 20px;
+}
+
+.delivery-card {
+  font-size: 25px;
+}
+
+.delivery-card pre {
+  font-size: 18px;
+}
+
+.payment-card {
+  font-size: 20px;
+}
+
+.delivery-card {
+  font-size: 25px;
+}
+
+.delivery-card pre {
+  font-size: 18px;
+}
+/*# sourceMappingURL=ViewOrder.css.map */

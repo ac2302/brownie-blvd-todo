@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+import { FaExclamationTriangle, FaTruck, FaRupeeSign } from "react-icons/fa";
+
 import Countdown from "./Countdown";
 import config from "../config";
+
+import "../styles/ViewOrder.css";
 
 function ViewOrder({ token }) {
 	const { id } = useParams();
 	const [details, setDetails] = useState({});
+
+	const isDue = Date.parse(details.dueDate) - Date.now() < 0;
 
 	useEffect(() => {
 		axios
@@ -35,21 +41,32 @@ function ViewOrder({ token }) {
 
 	return (
 		<div>
-			<button onClick={deleteOrder}>mark as done</button>
-			<h1>
-				{details.chocolateType} x{details.quantity}{" "}
-				{details.hasToBeDelivered ? "+delivery" : null}
-			</h1>
-			<h2>
-				{new Date(details.dueDate).toLocaleDateString()}{" "}
-				{new Date(details.dueDate).toLocaleTimeString()}
-			</h2>
-			<h3>
-				<Countdown to={details.dueDate} />
-			</h3>
+			<div className="details-card overview-card">
+				<div className="icons">
+					{isDue ? <FaExclamationTriangle className="icon due" /> : null}
+					{details.isPaidFor ? <FaRupeeSign className="icon paid" /> : null}
+					{details.hasToBeDelivered ? (
+						<FaTruck className="icon delivery" />
+					) : null}
+				</div>
+				<button onClick={deleteOrder}>mark as done</button>
+			</div>
+			<div className="details-card main-card">
+				<h1>
+					{details.chocolateType} x{details.quantity}
+				</h1>
+				<div className="due-date">
+					{new Date(details.dueDate).toLocaleDateString()}{" "}
+					{new Date(details.dueDate).toLocaleTimeString()}
+				</div>
+				<div className="countdown">
+					<Countdown to={details.dueDate} />
+				</div>
+			</div>
 			{/* delivery details */}
+
 			{details.hasToBeDelivered ? (
-				<div>
+				<div className="details-card delivery-card">
 					address:{" "}
 					<pre>
 						{details.deliveryAddress ? details.deliveryAddress : "missing"}
@@ -57,7 +74,7 @@ function ViewOrder({ token }) {
 				</div>
 			) : null}
 			{/* payment details */}
-			<div>
+			<div className="details-card payment-card">
 				{details.isPaidFor ? <div>paid</div> : null}
 				<div>
 					payment amount:{" "}
@@ -73,7 +90,7 @@ function ViewOrder({ token }) {
 			</div>
 			{/* note */}
 			{details.note ? (
-				<div>
+				<div className="details-card note-card">
 					notes:
 					<pre>{details.note}</pre>
 				</div>
