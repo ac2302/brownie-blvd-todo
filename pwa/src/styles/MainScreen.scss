@@ -3,13 +3,33 @@ $main: #3e8914;
 $dark: #ff00003f;
 
 $card-bg: #fdfffc;
+$jet: #2f2f2f;
+$good: #317b22;
+$bad: #e53d00;
 $card-shadow: rgba(0, 0, 255, 0.2);
 
 .order-card {
 	background-color: $card-bg;
 	padding: 40px;
+	margin-bottom: 30px;
 	border-radius: 10px;
 	box-shadow: 12px 10px 2px 1px $card-shadow;
+	.icons {
+		.icon {
+			font-size: 25px;
+			margin-top: 20px;
+			margin-right: 20px;
+		}
+		.due {
+			color: $bad;
+		}
+		.delivery {
+			color: $jet;
+		}
+		.paid {
+			color: $good;
+		}
+	}
 	a {
 		font-size: 30px;
 		display: block;
